@@ -1,0 +1,30 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+    
+}
+:root{
+  --fancy:#FFF560;
+  --fancy2:#2EE0AE;
+  --fancy2light:#C7E2C3;
+  --darkest:#664C4B;
+  --normal:#E3D0A6;
+  --light:#F8F4C7;
+}
+
+body {
+  background-color: var(--darkest);
+}
+
+h1 {
+  text-align: center;
+  color: var(--fancy2light);
+}
+
+canvas {
+  background:var(--darkest);
+  display: block;
+  margin: 0 auto;
+  border: 0.75rem solid var(--light)
+}

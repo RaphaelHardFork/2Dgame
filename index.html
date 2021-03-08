@@ -4,23 +4,13 @@
 <head>
   <meta charset="utf-8" />
   <title>Gamedev Canvas Workshop</title>
-  <style>
-    * {
-      padding: 0;
-      margin: 0;
-    }
-
-    canvas {
-      background: #eee;
-      display: block;
-      margin: 0 auto;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <!-- Page faite avec le tuto : https://developer.mozilla.org/fr/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript  -->
 
 <body>
+  <h1>Le casseur de briques</h1>
 
   <canvas id="myCanvas" width="480" height="320"></canvas>
 
@@ -53,7 +43,7 @@
 
     // Variables concernant la balle
     let ballRadius = 10
-    let ballColor = '#00FFFD'
+    let ballColor = '#2EE0AE'
     let x = canvas.width / 2
     let y = canvas.height - 30
     let dx = 2
@@ -62,7 +52,7 @@
     let paddleHeight = 10
     let paddleWidth = 75
     let paddleX = (canvas.width - paddleWidth) / 2
-    let paddleColor = '#999333'
+    let paddleColor = '#FFF560'
     // Variables concernant les briques
     let brickRowCount = 6
     let brickColumnCount = 7
@@ -71,6 +61,7 @@
     let brickPadding = 10
     let brickOffsetTop = 30
     let brickOffsetLeft = 30
+    let brickColor = '#C7E2C3'
     // Boucles pour la création des briques
     let bricks = []
     for (let c = 0; c < brickColumnCount; c++) {
@@ -117,9 +108,19 @@
           if (b.status == 1) {
             if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
               dy = -dy
-              ballColor = '#333333'
+              setInterval(draw, 50)
+              paddleWidth += 10
               b.status = 0
               score++
+              if (score > 20) {
+                let color = ballColor
+                let paddle = paddleColor
+                let brikk = brickColor
+                ballColor = brikk
+                paddleColor = paddle
+                brickColor = color
+
+              }
               if (score === brickRowCount * brickColumnCount) {
                 alert("C'est gagné, Bravo!")
                 document.location.reload()
@@ -133,7 +134,7 @@
 
     const drawScore = () => {
       ctx.font = "16px Arial";
-      ctx.fillStyle = "#0095DD";
+      ctx.fillStyle = "#FFF560";
       ctx.fillText("Score: " + score, 8, 20);
     }
 
@@ -162,7 +163,7 @@
             bricks[c][r].y = brickY
             ctx.beginPath()
             ctx.rect(brickX, brickY, brickWidth, brickHeight)
-            ctx.fillStyle = "#0095DD"
+            ctx.fillStyle = brickColor
             ctx.fill()
             ctx.closePath()
           }
@@ -187,8 +188,7 @@
       } else if (y + dy > canvas.height - ballRadius) {
         if (x > paddleX && x < paddleX + paddleWidth) {
           dy = -dy
-          paddleColor = '#555555'
-          ballColor = '#FFFFFF'
+
 
 
         }
